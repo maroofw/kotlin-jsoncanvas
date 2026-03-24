@@ -1,0 +1,12 @@
+#!/bin/sh
+echo "Running gitleaks..."
+gitleaks detect --source . --verbose
+status=$?
+
+if [ $status -ne 0 ]; then
+  echo "❌ Gitleaks detected potential secrets. Commit aborted."
+  exit 1
+fi
+
+echo "✔ No leaks detected. Proceeding with commit."
+exit 0
